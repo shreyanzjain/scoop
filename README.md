@@ -1,4 +1,4 @@
-# Resume Analyzer
+# Scoop
 
 **Requirements:**
 Python 3.7.7
