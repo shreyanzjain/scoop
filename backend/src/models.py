@@ -1,5 +1,6 @@
 from src.database import Base
-from sqlalchemy import Column, String, Date, Integer, Float
+from sqlalchemy import Column, String, Date, Integer, Float, ForeignKey
+from sqlalchemy.orm import relationship
 from datetime import datetime
 
 class User(Base):
@@ -12,6 +13,8 @@ class User(Base):
     resume_path = Column(String)
     date_registered = Column(Date, default=datetime.utcnow)
 
+    scores = relationship("UserScores", back_populates="user")
+
 class UserScores(Base):
 
     __tablename__ = "user_scores"
@@ -20,3 +23,6 @@ class UserScores(Base):
     job_title = Column(String)
     company = Column(String)
     score = Column(Float)
+    user_id = Column(Integer, ForeignKey('users.id'))
+
+    user = relationship("User", back_populates="scores")
