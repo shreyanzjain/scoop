@@ -14,10 +14,6 @@ class UserLogin(UserCreate):
 
     pass
 
-class UserResumeUpload(UserBase):
-
-    resume_path: str
-
 class User(UserBase):
 
     id: int

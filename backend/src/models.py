@@ -10,7 +10,6 @@ class User(Base):
     id = Column(Integer, primary_key=True, index=True)
     username = Column(String(18), unique=True)
     password = Column(String(64))
-    resume_path = Column(String)
     date_registered = Column(Date, default=datetime.utcnow)
 
     scores = relationship("UserScores", back_populates="user")
