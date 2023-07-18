@@ -27,3 +27,10 @@ def authenticate_user(user: schemas.UserLogin, db: Session):
             return{"Invalid": "Password"}
     else:
         raise HTTPException(400, 'User not found.')
+    
+def add_score(user_id: int, create_score: schemas.UserScoresCreate, db: Session):
+    new_score = models.UserScores(**create_score.model_dump(), user_id=user_id)
+    db.add(new_score)
+    db.commit()
+    db.refresh(new_score)
+    return new_score
