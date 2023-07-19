@@ -1,9 +1,10 @@
 import React from "react";
+import logo from "../logo.svg";
 
 function Navbar() {
   return (
-      <nav className="navbar navbar-expand-lg border-bottom mb-3" data-bs-theme="dark" style={{borderColor: 'white'}}>
-        <div className="container-fluid">
+      <nav className="navbar navbar-expand-lg mb-3 py-3 bg-light sticky-top" style={{backgroundColor: (0,0,0, 0.25)}}>
+        <div className="container">
           <a className="navbar-brand" href="/">
             Scoop
           </a>
@@ -19,15 +20,15 @@ function Navbar() {
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+            <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <a className="nav-link active" aria-current="page" href="#">
+                <a className="btn btn-light nav-link" aria-current="page" href="/">
                   Home
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">
-                  Link
+                <a className="btn btn-light nav-link" aria-current="page" href="/login/">
+                  Login
                 </a>
               </li>
             </ul>

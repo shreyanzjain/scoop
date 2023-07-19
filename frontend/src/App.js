@@ -3,7 +3,7 @@ import Navbar from './components/Navbar';
 
 function App() {
   return (
-    <div className="App" style={{backgroundColor: 'black', height: '100vh'}}>
+    <div className="App">
       <Navbar/>
     </div>
   );
