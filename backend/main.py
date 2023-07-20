@@ -1,4 +1,4 @@
-from fastapi import FastAPI, HTTPException, Request, Depends
+from fastapi import FastAPI, HTTPException, Request, Depends, UploadFile
 from typing import List
 from typing_extensions import Annotated
 from src.database import SessionLocal, engine
@@ -42,6 +42,19 @@ def add_score(username: str, create_score: schemas.UserScoresCreate, db: Session
         raise HTTPException(404, 'User Does Not Exist!')
     else:
         return methods.add_score(username, create_score, db)
+    
+@app.post("/user/{username}/resume")
+def upload_resume(username: str, file: UploadFile, db: Session = Depends(get_db)):
+    check_user = db.query(models.User).filter(models.User.username == username).first()
+    if(not check_user):
+        raise HTTPException(404, 'User Does Not Exist!')
+    else:
+        if file.content_type != "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
+            raise HTTPException(415, "Unsupported filetype. Only 'docx' files are accepted! ")
+        file_location = f"./static/{username}_resume.docx"
+        with open(file_location, mode='wb') as new_file:
+            new_file.write(file.file.read())
+        return {"User": "Valid", "Path": file_location}
 
 @app.get("/user/score", response_model=List[schemas.UserScores])
 def get_user_posts(db: Session = Depends(get_db)):

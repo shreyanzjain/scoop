@@ -10,3 +10,6 @@ __pycache__/
 # environment variables
 .env
 env.py
+
+# static files {user uploads, etc.}
+static
