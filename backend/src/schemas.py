@@ -40,3 +40,4 @@ class UserScores(UserScoresBase):
 
     class Config:
         from_attributes = True
+        

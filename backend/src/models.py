@@ -13,7 +13,6 @@ class User(Base):
     date_registered = Column(Date, default=datetime.utcnow)
 
     scores = relationship("UserScores", back_populates="user")
-    resume = relationship("UserResume", back_populates="user")
 
 class UserScores(Base):
 
@@ -26,13 +25,3 @@ class UserScores(Base):
     user_id = Column(Integer, ForeignKey('users.id'))
 
     user = relationship("User", back_populates="scores")
-
-class UserResume(Base):
-
-    __tablename__ = "user_resumes"
-
-    id = Column(Integer, primary_key=True, index=True)
-    path = Column(String(50))
-    user_id = Column(Integer, ForeignKey('users.id'))
-
-    user = relationship("User", back_populates="resume")

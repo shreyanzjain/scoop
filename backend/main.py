@@ -4,6 +4,7 @@ from typing_extensions import Annotated
 from src.database import SessionLocal, engine
 from sqlalchemy.orm import Session
 from src import models, schemas, methods
+import globals
 
 models.Base.metadata.create_all(bind=engine)
 
@@ -17,7 +18,7 @@ def get_db():
 app = FastAPI()
 
 # placeholder logged in user
-curr_user_id: int = 1
+curr_user_id: int = 2
 
 @app.get("/")
 def home():
@@ -56,6 +57,10 @@ def upload_resume(username: str, file: UploadFile, db: Session = Depends(get_db)
             new_file.write(file.file.read())
         return {"User": "Valid", "Path": file_location}
 
+@app.get("/user/{username}/keywords")
+def get_keywords(username: str):
+    return
+
 @app.get("/user/score", response_model=List[schemas.UserScores])
-def get_user_posts(db: Session = Depends(get_db)):
+def get_user_scores(db: Session = Depends(get_db)):
     return db.query(models.UserScores).filter(models.UserScores.user_id == curr_user_id).all()
