@@ -2,6 +2,12 @@ from sqlalchemy.orm import Session
 from src import models, schemas
 import bcrypt
 from fastapi import HTTPException
+import globals
+import docx2txt as dxt
+from rake_nltk import Rake
+import nltk
+nltk.download('stopwords', './static')
+nltk.download('punkt', './static')
 
 def create_user(user: schemas.UserCreate, db: Session):
     hashed_password = bcrypt.hashpw(bytes(user.password, encoding="utf-8"), 
@@ -34,3 +40,13 @@ def add_score(username: str, create_score: schemas.UserScoresCreate, db: Session
     db.commit()
     db.refresh(new_score)
     return new_score
+
+def extract_keywords_from_docx(username: str, db: Session):
+    file_location = globals.get_file_path_docx(username)
+    resume_text = dxt.process(file_location)
+    r = Rake()
+    r.extract_keywords_from_text(resume_text)
+    keywords = set()
+    for i in  r.frequency_dist:
+        keywords.add(i)
+    return keywords
