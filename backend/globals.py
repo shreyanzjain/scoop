@@ -347,3 +347,6 @@ KEYWORDS = {'APM',
             'of',
             'on'
         }
+
+def get_file_path_docx(username: str):
+    return f"./static/{username}_resume.docx"
