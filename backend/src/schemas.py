@@ -41,3 +41,8 @@ class UserScores(UserScoresBase):
     class Config:
         from_attributes = True
         
+class JobDesc(BaseModel):
+    text: str
+
+    class Config:
+        from_attributes = True

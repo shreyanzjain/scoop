@@ -46,5 +46,13 @@ def extract_keywords_from_docx(username: str, db: Session):
     r.extract_keywords_from_text(resume_text)
     keywords = set()
     for i in r.frequency_dist:
-        keywords.add(i.lower())
+        keywords.add(i)
+    return keywords
+
+def extract_keywords_from_job_desc_text(username: str, text: str, db: Session):
+    r = Rake()
+    r.extract_keywords_from_text(text=text)
+    keywords = set()
+    for i in r.frequency_dist:
+        keywords.add(i)
     return keywords
