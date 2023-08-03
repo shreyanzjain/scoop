@@ -5,9 +5,7 @@ from fastapi import HTTPException
 import globals
 import docx2txt as dxt
 from rake_nltk import Rake
-import nltk
-nltk.download('stopwords', './static')
-nltk.download('punkt', './static')
+
 
 def create_user(user: schemas.UserCreate, db: Session):
     hashed_password = bcrypt.hashpw(bytes(user.password, encoding="utf-8"), 
@@ -47,6 +45,6 @@ def extract_keywords_from_docx(username: str, db: Session):
     r = Rake()
     r.extract_keywords_from_text(resume_text)
     keywords = set()
-    for i in  r.frequency_dist:
-        keywords.add(i)
+    for i in r.frequency_dist:
+        keywords.add(i.lower())
     return keywords

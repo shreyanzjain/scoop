@@ -1,10 +1,13 @@
-from fastapi import FastAPI, HTTPException, Request, Depends, UploadFile
+from fastapi import FastAPI, HTTPException, Depends, UploadFile
 from typing import List
-from typing_extensions import Annotated
 from src.database import SessionLocal, engine
 from sqlalchemy.orm import Session
 from src import models, schemas, methods
-import globals
+
+# import nltk
+# nltk.download('stopwords', './static')
+# nltk.download('punkt', './static')
+# Uncomment the above if you are running this application for the first time!
 
 models.Base.metadata.create_all(bind=engine)
 
