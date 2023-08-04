@@ -56,3 +56,10 @@ def extract_keywords_from_job_desc_text(username: str, text: str, db: Session):
     for i in r.frequency_dist:
         keywords.add(i)
     return keywords
+
+def extract_common_keywords(resume_keywords: set, job_desc_keywords: set):
+    extracted_keywords = set()
+    for i in resume_keywords:
+        if i in job_desc_keywords:
+            extracted_keywords.add(i)
+    return extracted_keywords

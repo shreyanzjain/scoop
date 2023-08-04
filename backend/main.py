@@ -66,11 +66,8 @@ def upload_resume(username: str, file: UploadFile, db: Session = Depends(get_db)
 def get_keywords(username: str, job_desc: schemas.JobDesc, db: Session = Depends(get_db)):
     resume_keywords = methods.extract_keywords_from_docx(username, db)
     job_desc_keywords = methods.extract_keywords_from_job_desc_text(username, job_desc.text, db)
-    extracted_keywords = set()
-    for i in resume_keywords:
-        if i in job_desc_keywords:
-            extracted_keywords.add(i)
-    return extracted_keywords
+    return methods.extract_common_keywords(resume_keywords=resume_keywords,
+                                           job_desc_keywords=job_desc_keywords)
 
 @app.get("/user/score", response_model=List[schemas.UserScores])
 def get_user_scores(db: Session = Depends(get_db)):
