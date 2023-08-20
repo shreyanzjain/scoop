@@ -1,5 +1,5 @@
 # Scoop
-
+### As of now only the backend is functional, the frontend is yet to be written
 **Requirements:**
 Python v3.7.7
 Node.js v16.3.1
