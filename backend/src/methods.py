@@ -20,7 +20,6 @@ def authenticate_user(user: schemas.UserLogin, db: Session):
     tmp_user = db.query(models.User).filter(models.User.username == user.username).first()
     if tmp_user:
         hashed_password = tmp_user.password
-        print(len(hashed_password))
         is_valid = bcrypt.checkpw(bytes(user.password, "utf-8"), 
                                   bytes(hashed_password, "utf-8"))
         if is_valid:

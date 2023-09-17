@@ -53,6 +53,7 @@ def upload_resume(username: str, file: UploadFile, db: Session = Depends(get_db)
         raise HTTPException(404, 'User Does Not Exist!')
     
     else: # if they do exist, and the file format is docx then store the file as {username}_resume.docx in the static folder
+        # check for document type
         if file.content_type != "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
             raise HTTPException(415, "Unsupported filetype. Only '.docx' files are accepted! ")
         
