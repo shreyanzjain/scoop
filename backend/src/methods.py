@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
 from src import models, schemas
-import bcrypt
+import bcrypt2
 from fastapi import HTTPException
 import globals
 import docx2txt as dxt
